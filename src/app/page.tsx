@@ -29,10 +29,15 @@ export default function Home() {
 
   }
 
+
+  const deleteTask = (id: string) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
   return (
     <div className=''>
       <WebHeader />
-      <div className='flex gap-2 my-3'>
+      <div className='flex gap-2 m-3'>
         <div>Add your Tasks</div>
         <input
           onKeyDown={onEnterPressed}
@@ -48,11 +53,16 @@ export default function Home() {
           Add Task
         </button>
       </div>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>{task.title}</li>
-        ))}
-      </ul>
+
+      {tasks.length === 0 ? <div>No Tasks</div> :
+        <ul className="">
+          {tasks.map((task, index) => (
+            <li className='m-3 bg-gray-200 text-black text-xl w-auto' key={task.id}>{index + 1} - {task.title}
+              <button>Delete</button>
+            </li>
+
+          ))}
+        </ul>}
     </div>
   );
 }
